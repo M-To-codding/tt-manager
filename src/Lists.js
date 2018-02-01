@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 
 export default class Lists extends Component {
-    render(){
-        return <div>This is lists</div>
-    }
+
+  render() {
+    return <div>This is lists</div>
+  }
+
 }
