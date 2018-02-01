@@ -6,9 +6,9 @@ import {
     Link
 } from 'react-router-dom';
 
-import Archive from './Archive';
-import Active from './Active';
-import Backlog from './Backlog';
+import Lists from './Lists';
+import InWork from './InWork';
+import Main from './Main';
 
 
 class App extends Component {
@@ -20,13 +20,13 @@ class App extends Component {
                         <nav>
                             <ul>
                                 <li>
-                                    <Link to="/backlog">Backlog</Link>
+                                    <Link to="/main">Main</Link>
                                 </li>
                                 <li>
-                                    <Link to="/active">Active</Link>
+                                    <Link to="/inWork">In work</Link>
                                 </li>
                                 <li>
-                                    <Link to="/archive">Archive</Link>
+                                    <Link to="/lists">Lists</Link>
                                 </li>
                             </ul>
                         </nav>
@@ -34,16 +34,16 @@ class App extends Component {
 
                     <main>
                         <Route
-                            path="/backlog"
-                            component={Backlog}
+                            path="/main"
+                            component={Main}
                         />
                         <Route
-                            path="/active"
-                            component={Active}
+                            path="/inWork"
+                            component={InWork}
                         />
                         <Route
-                            path="/archive"
-                            component={Archive}
+                            path="/lists"
+                            component={Lists}
                         />
                     </main>
                 </div>
