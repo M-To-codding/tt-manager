@@ -6,9 +6,9 @@ import {
   Link
 } from 'react-router-dom';
 
-import Lists from './Lists';
-import InWork from './InWork';
-import Main from './Main';
+import Lists from './pages/Lists';
+import InWork from './pages/InWork';
+import Main from './pages/Main';
 
 
 class App extends Component {

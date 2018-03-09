@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import TasksForm from './TasksForm';
+import TasksForm from '../task/TasksForm';
 
 export default class Main extends Component {
 
