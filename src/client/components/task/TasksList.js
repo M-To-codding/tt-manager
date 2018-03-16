@@ -28,6 +28,15 @@ export default class TasksList extends Component {
         <select value={task.status}>
           {options}
         </select>
+        <br/>
+        <small>
+          {task.date},
+        </small>
+        <small>
+          {task.time},
+        </small>
+        <br/>
+        <br/>
       </li>
     )
 
