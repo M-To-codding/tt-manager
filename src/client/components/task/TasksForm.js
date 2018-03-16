@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {LocalForm, Control, Errors} from 'react-redux-form';
+import moment from 'moment';
 
 import tasks from './tasks';
 import Task from "./Task";
@@ -10,7 +11,10 @@ export default class TasksForm extends Component {
     super(props);
 
     this.tasksArr = tasks.allTasks;
-    console.log(this.tasksArr);
+    this.currentDate = moment();
+    moment.lang('ru');
+
+    console.log(tasks)
 
     this.state = {
       tasks: this.tasksArr,
@@ -28,7 +32,12 @@ export default class TasksForm extends Component {
   }
 
   handleBtnSubmit(values) {
-    const task = new Task(values.name, 'NEW');
+    const task = new Task({
+      name: values.name,
+      status: 'NEW',
+      time: this.currentDate.format('h:mm:ss'),
+      date: this.currentDate.format('DD.MM.YYYY')
+    });
     this.tasksArr = tasks.allTasks.push(task);
     console.log(this.tasksArr);
     this.setState({
