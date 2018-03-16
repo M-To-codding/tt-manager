@@ -13,20 +13,29 @@ const tasks = {
 
 let tasksItems = [{
   name: 'Ride on a bike',
-  status: 'NEW'
+  status: 'NEW',
+  time: '11:18:32',
+  date: '10.03.2018'
 },
   {
     name: 'Swim',
-    status: 'IN_WORK'
+    status: 'IN_WORK',
+    time: '10:18:32',
+    date: '14.03.2018'
   },
   {
     name: 'Write code',
-    status: 'COMPLETED'
+    status: 'COMPLETED',
+    time: '00:18:32',
+    date: '15.03.2018'
   }
 ];
 
 for (let i = 0; i < tasksItems.length; i++) {
-  let taskObj = new Task(tasksItems[i].name, tasksItems[i].status);
+  let taskObj = new Task({
+    name: tasksItems[i].name, status: tasksItems[i].status, time: tasksItems[i].time,
+    date: tasksItems[i].date
+  });
   allTasks.push(taskObj);
 }
 
