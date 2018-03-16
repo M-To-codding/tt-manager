@@ -12,7 +12,7 @@ export default class TasksForm extends Component {
       value: ''
     };
 
-    this.task = {};
+    this.task = [];
 
     this.handleValueChange = this.handleValueChange.bind(this);
     this.handleBtnSubmit = this.handleBtnSubmit.bind(this);
@@ -32,29 +32,19 @@ export default class TasksForm extends Component {
       return;
     }
 
-    this.task = new Task(this.state.value, 'new');
-    this.setState(
-      prevState => ({
-        tasks: prevState.tasks.concat(this.task),
+    this.task.push();
+    console.log(this.task)
+    this.setState({
+        tasks: this.state.tasks.allTasks.push(new Task(this.state.value, 'NEW')),
         value: ''
-      })
-    );
+      });
 
     console.log(this.state);
   }
 
   render() {
 
-    const listItems = this.state.tasks.map((task, index) =>
-      <li key={index} id={index}>
-        <span>{task.name}</span>
-        <button>{task.status}</button>
-      </li>
-    )
-
     return (
-      <article className="tasks-content">
-        <ul className="tasks-list">{listItems}</ul>
         <form onSubmit={this.handleBtnSubmit}>
           <label>
             Task name: {this.state.value}
@@ -64,7 +54,6 @@ export default class TasksForm extends Component {
           <input
             type="submit" value="Add task"/>
         </form>
-      </article>
     )
   }
 
