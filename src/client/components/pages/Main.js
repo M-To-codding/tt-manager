@@ -1,21 +1,23 @@
 import React, {Component} from 'react';
+import tasks from './../task/tasks';
+import TasksList from './../task/TasksList';
 import TasksForm from '../task/TasksForm';
 
 export default class Main extends Component {
 
-  constructor(props) {
-    super(props);
-  }
+    render() {
 
-  render() {
+        return (
+            <div className="main-page">
+                <article className="tasks-content">
+                    <TasksList {...[tasks.allTasks]} />
 
-    return (
-      <div className="main-page">
-        <main>
-          <TasksForm/>
-        </main>
-      </div>
-    )
-  }
+                    <main>
+                        <TasksForm/>
+                    </main>
+                </article>
+            </div>
+        )
+    }
 
 }
