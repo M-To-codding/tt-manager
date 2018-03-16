@@ -1,6 +1,8 @@
 export default class Task {
-  constructor(name, status){
-    this.name = name;
-    this.status = status;
+  constructor(data){
+    this.name = data.name;
+    this.status = data.status;
+    this.time = data.time;
+    this.date = data.date;
   }
 }
