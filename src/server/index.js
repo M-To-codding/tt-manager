@@ -1,8 +1,10 @@
-let expess = require('express'),
+let express = require('express'),
   app = express(),
   bodyParser = require('body-parser'),
-  main = '';
+  index = require('./controllers/index.js'),
+  main = require('./controllers/main.js');
 
+require('./db');
 
 app.listen(8080, () => {
   console.log('Server works!');
@@ -11,7 +13,9 @@ app.listen(8080, () => {
 app.use(bodyParser.json());
 
 app.use(express.static(__dirname + './../../build/'));
-app.use('api/v1', main);
+
+app.use('/api/v1', index);
+app.use('/api/v1', main);
 
 
 module.exports = app;
