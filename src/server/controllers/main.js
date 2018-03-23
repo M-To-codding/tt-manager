@@ -11,12 +11,13 @@ router.get('/main', function (req, res) {
 })
 
 router.post('/main/add', function (req, res) {
-  if (!req.body.tasks){
+  console.log(req.body);
+  if (!req.body){
     console.log('Tasks is empty!');
     return;
   }
   let task = new Task(req.body);
-  console.log(req.body);
+  // console.log(req.body);
   task.save((err, taskObj) => {
     res.json({taskObj});
     console.log(taskObj);

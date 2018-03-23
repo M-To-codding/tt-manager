@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {LocalForm, Control, Errors} from 'react-redux-form';
 import moment from 'moment';
 
-import tasks from './tasks';
 import Task from "./Task";
 
 export default class TasksForm extends Component {
@@ -10,14 +9,11 @@ export default class TasksForm extends Component {
   constructor(props) {
     super(props);
 
-    this.tasksArr = tasks.allTasks;
+    this.tasksArr = [];
     this.currentDate = moment();
     moment.lang('ru');
 
-    console.log(tasks)
-
     this.state = {
-      tasks: this.tasksArr,
       value: ''
     };
 
@@ -32,17 +28,28 @@ export default class TasksForm extends Component {
   }
 
   handleBtnSubmit(values) {
-    const task = new Task({
+
+    let task = new Task({
       name: values.name,
       status: 'NEW',
       time: this.currentDate.format('h:mm:ss'),
       date: this.currentDate.format('DD.MM.YYYY')
     });
-    this.tasksArr = tasks.allTasks.push(task);
-    console.log(this.tasksArr);
     this.setState({
-      tasks: this.tasksArr,
-      value: values.name
+      value: ''
+    });
+
+    console.log(JSON.stringify(task));
+
+    fetch('/api/v1/main/add', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(task)
+    }).then(function () {
+      console.log('add');
     });
   }
 
