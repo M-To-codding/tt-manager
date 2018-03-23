@@ -1,23 +1,28 @@
 import React, {Component} from 'react';
-import tasks from './../task/tasks';
 import TasksList from './../task/TasksList';
 import TasksForm from '../task/TasksForm';
 
 export default class Main extends Component {
 
-    render() {
+  constructor(props) {
+    super(props);
+    this.routeName = 'main';
+  }
 
-        return (
-            <div className="main-page">
-                <article className="tasks-content">
-                    <TasksList {...[tasks.allTasks]} />
+  render() {
 
-                    <main>
-                        <TasksForm/>
-                    </main>
-                </article>
-            </div>
-        )
-    }
+    return (
+      <div className="main-page">
+        <article className="tasks-content">
+
+          <main>
+            <TasksList {...[this.routeName]} />
+            <TasksForm/>
+          </main>
+
+        </article>
+      </div>
+    )
+  }
 
 }
