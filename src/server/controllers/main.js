@@ -11,7 +11,7 @@ router.get('/main', function (req, res) {
 })
 
 router.post('/main/add', function (req, res) {
-  console.log(req.body);
+
   if (!req.body){
     console.log('Tasks is empty!');
     return;
@@ -25,11 +25,26 @@ router.post('/main/add', function (req, res) {
 })
 
 router.put('/main/:id', function (req, res) {
-  Task.update({_id: id}, function () {
-    res.json({
-      'status': 'ok'
+  if(req.body.status) {
+    Task.update({_id: req.params.id}, {status: req.body.status}, function (err) {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log(req.body);
+      }
     })
-  })
+  } else {
+    Task.update({_id: req.params.id}, {name: req.body.name}, function (err) {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log(req.body);
+        Task.find({}, function (err, tasks) {
+          res.json({tasks});
+        });
+      }
+    })
+  }
 })
 
 
