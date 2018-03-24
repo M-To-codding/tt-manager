@@ -11,21 +11,92 @@ export default class TasksList extends Component {
       this.statuses.push(item);
     }
 
-    this.routeName = props[0];
-
     this.state = {
-      tasks: []
-    }
-
-    console.log(props);
+      tasks: [],
+      routeName: props[0],
+      isEditOn: false
+    };
   }
 
   componentDidMount() {
-    fetch('/api/v1/' + this.routeName)
+    fetch(`/api/v1/${this.state.routeName}`)
       .then((res) => res.json())
       .then((data) => this.setState({
         tasks: data.tasks
       }))
+  }
+
+  handleStatusChange(event) {
+    event.preventDefault();
+
+    let taskId = event.target.parentNode.id,
+      elems = event.target.childNodes,
+      elemStatus = '';
+
+    for (let i = 0; i < elems.length; i++) {
+      if (elems[i].selected) {
+        elemStatus = elems[i].value;
+      }
+    }
+
+    let taskObj = {
+      status: elemStatus
+    }
+
+    console.log(event.target);
+    fetch(`/api/v1/${this.state.routeName}/${taskId}`, {
+      method: 'PUT',
+      mode: 'CORS',
+      body: JSON.stringify(taskObj),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).catch(err => err);
+  }
+
+  showEditInput(event) {
+    let elems = event.target.parentNode.childNodes,
+      hiddenInput = '',
+      task = '';
+
+    for (let i = 0; i < elems.length; i++) {
+
+      if (elems[i].classList.contains('task-name')) {
+        task = elems[i];
+      }
+      if (elems[i].classList.contains('task-name-edit')) {
+        hiddenInput = elems[i];
+        hiddenInput.removeAttribute('hidden');
+      }
+    }
+
+    document.body.onclick = function (e) {
+      if (!e.target.classList.contains('task-name-edit')) {
+        hiddenInput.setAttribute('hidden', 'true');
+      }
+      return;
+    }
+  }
+
+  changeName(event) {
+
+    let taskId = event.target.parentNode.id,
+      value = event.target.value;
+
+    fetch(`/api/v1/${this.state.routeName}/${taskId}`, {
+      method: 'PUT',
+      mode: 'CORS',
+      body: JSON.stringify({name: value}),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }, function () {
+      console.log('fdfsdsf');
+    }).then((res) => res.json())
+      .then((data) => this.setState({
+          tasks: data.tasks
+        })
+      );
   }
 
   render() {
@@ -37,18 +108,28 @@ export default class TasksList extends Component {
     )
 
     const listItems = this.state.tasks.map((task, index) =>
-      <li key={index} id={index}>
-        <span>{task.name}</span>
-        <select value={task.status}>
+      <li key={index} id={task._id}>
+
+        <span className="task-name">{task.name}</span>
+        <input className="task-name-edit" onChange={this.changeName.bind(this)} defaultValue={task.name} hidden/>
+
+        <img src="https://cdn0.iconfinder.com/data/icons/basic-line-5/1024/edit-128.png"
+             alt="rename" height="20" width="20" onClick={this.showEditInput}/>
+
+        <select id={"select-" + task._id} defaultValue={task.status} onChange={this.handleStatusChange.bind(this)}>
           {options}
         </select>
+
         <br/>
+
         <small>
           {task.date},
         </small>
+
         <small>
-          {task.time},
+          {task.time}
         </small>
+
         <br/>
         <br/>
       </li>
