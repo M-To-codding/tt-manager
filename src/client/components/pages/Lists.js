@@ -1,13 +1,17 @@
 import React, {Component} from 'react';
-import tasks from './../task/tasks';
 import TasksList from './../task/TasksList';
 
 export default class Lists extends Component {
 
+  constructor(props) {
+    super(props);
+    this.routeName = 'lists';
+  }
+
     render() {
         return (
             <article className="tasks-content">
-                <TasksList {...[tasks.completedTasks]} />
+                <TasksList {...[this.routeName]} />
             </article>
         )
     }
