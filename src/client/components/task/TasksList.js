@@ -90,8 +90,6 @@ export default class TasksList extends Component {
       headers: {
         'Content-Type': 'application/json'
       }
-    }, function () {
-      console.log('fdfsdsf');
     }).then((res) => res.json())
       .then((data) => this.setState({
           tasks: data.tasks
@@ -108,28 +106,32 @@ export default class TasksList extends Component {
     )
 
     const listItems = this.state.tasks.map((task, index) =>
-      <li key={index} id={task._id}>
+      <li key={index} id={task._id} className="task-item">
 
-        <span className="task-name">{task.name}</span>
-        <input className="task-name-edit" onChange={this.changeName.bind(this)} defaultValue={task.name} hidden/>
+        <div className="form-group">
+          <span className="task-name">{task.name}</span>
+          <input className="task-name-edit" onChange={this.changeName.bind(this)} defaultValue={task.name} hidden/>
 
-        <img src="https://cdn0.iconfinder.com/data/icons/basic-line-5/1024/edit-128.png"
-             alt="rename" height="20" width="20" onClick={this.showEditInput}/>
+          <img src="https://cdn0.iconfinder.com/data/icons/basic-line-5/1024/edit-128.png"
+               alt="rename" className="edit" onClick={this.showEditInput}/>
 
-        <select id={"select-" + task._id} defaultValue={task.status} onChange={this.handleStatusChange.bind(this)}>
-          {options}
-        </select>
+          <select id={"select-" + task._id} defaultValue={task.status} className="status-select -gray-bg"
+                  onChange={this.handleStatusChange.bind(this)}>
+            {options}
+          </select>
+        </div>
 
         <br/>
 
-        <small>
-          {task.date},
-        </small>
+        <div className="date-time">
+          <small>
+            {task.date},&nbsp;
+          </small>
 
-        <small>
-          {task.time}
-        </small>
-
+          <small>
+            {task.time}
+          </small>
+        </div>
         <br/>
         <br/>
       </li>

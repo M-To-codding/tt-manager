@@ -8,7 +8,7 @@ export default function setTime(e) {
 
   e.target.setAttribute('disabled', 'true');
 
-  resetBtn = '<button> Reset timer' +
+  resetBtn = '<button class="reset-timer -red-bg"> Reset timer' +
     '</button>';
   div.innerHTML = resetBtn;
   e.target.parentNode.appendChild(div);

@@ -32,10 +32,7 @@ export default class Timer extends Component {
     )
 
     return (
-      <article>
-        {/*{timerBtn}*/}
-        <button className="timer" onClick={setTime}>0:00</button>
-      </article>
+        <button className="timer-btn -black-bg" onClick={setTime}>0:00</button>
     )
   }
 }
