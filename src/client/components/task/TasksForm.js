@@ -11,7 +11,7 @@ export default class TasksForm extends Component {
 
     this.tasksArr = [];
     this.currentDate = moment();
-    moment.lang('ru');
+    moment.locale('ru');
 
     this.state = {
       value: ''
