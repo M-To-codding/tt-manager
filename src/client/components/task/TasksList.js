@@ -16,9 +16,11 @@ export default class TasksList extends Component {
       routeName: props[0],
       isEditOn: false
     };
+
+    this.getAllTasks();
   }
 
-  componentDidMount() {
+  getAllTasks() {
     fetch(`/api/v1/${this.state.routeName}`)
       .then((res) => res.json())
       .then((data) => this.setState({
@@ -29,7 +31,7 @@ export default class TasksList extends Component {
   handleStatusChange(event) {
     event.preventDefault();
 
-    let taskId = event.target.parentNode.id,
+    let taskId = event.target.parentNode.parentNode.id,
       elems = event.target.childNodes,
       elemStatus = '';
 
@@ -51,7 +53,7 @@ export default class TasksList extends Component {
       headers: {
         'Content-Type': 'application/json'
       }
-    }).catch(err => err);
+    })
   }
 
   showEditInput(event) {
@@ -80,8 +82,9 @@ export default class TasksList extends Component {
 
   changeName(event) {
 
-    let taskId = event.target.parentNode.id,
+    let taskId = event.target.parentNode.parentNode.id,
       value = event.target.value;
+
 
     fetch(`/api/v1/${this.state.routeName}/${taskId}`, {
       method: 'PUT',
