@@ -26,7 +26,7 @@ router.put('/lists/:id', function (req, res) {
         console.log(err);
       } else {
         console.log(req.body);
-        Task.find({}, function (err, tasks) {
+        Task.find({status: 'COMPLETED'}, function (err, tasks) {
           res.json({tasks});
         });
       }

@@ -26,7 +26,7 @@ router.put('/inWork/:id', function (req, res) {
         console.log(err);
       } else {
         console.log(req.body);
-        Task.find({}, function (err, tasks) {
+        Task.find({status: 'IN_WORK'}, function (err, tasks) {
           res.json({tasks});
         });
       }
