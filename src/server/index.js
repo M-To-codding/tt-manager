@@ -14,6 +14,7 @@ app.listen(process.env.PORT || 8080, () => {
 
 app.use(bodyParser.json());
 
+app.use(express.static(__dirname + './../../build/static/'));
 app.use(express.static(__dirname + './../../build/'));
 
 app.use('/api/v1', index);
@@ -21,5 +22,6 @@ app.use('/api/v1', main);
 app.use('/api/v1', work);
 app.use('/api/v1', lists);
 
+app.set('view engine', 'jade');
 
 module.exports = app;
