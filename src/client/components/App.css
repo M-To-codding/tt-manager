@@ -68,6 +68,13 @@ main {
     border: 1px solid #c1c1c1;
     outline: #000;
     margin: 0 10px;
+    cursor: pointer;
+}
+
+.timer-btn, .reset-timer {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
 }
 
 .status-select option {
