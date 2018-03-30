@@ -103,14 +103,17 @@ export default class TasksList extends Component {
   }
 
   renderTimer(task) {
-    if (this.state.routeName === 'inWork'){
-      return <Timer taskId={task._id}/>;
+    if (this.state.routeName === 'inWork') {
+      return <Timer taskId={task._id} progressTime={task.progressTime} routeName={this.state.routeName}/>;
     } else {
       return '';
     }
   }
 
   render() {
+
+    const route = this.state.routeName;
+
     const options = this.statuses.map((option, index) =>
       <option value={option} key={index}>
         {option}
@@ -144,9 +147,15 @@ export default class TasksList extends Component {
             {task.time}
           </small>
         </div>
+        {
+          route === 'lists' &&
+          <div>
+            <b> {task.progressTime}</b>
+          </div>
+        }
         <br/>
         <br/>
-          {this.renderTimer(task)}
+        {this.renderTimer(task)}
       </li>
     )
 
