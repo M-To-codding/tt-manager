@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
+
 import {statusFilters} from '../../actions/statuses';
+import Timer from './../timer/Timer';
 
 export default class TasksList extends Component {
 
@@ -100,8 +102,15 @@ export default class TasksList extends Component {
       );
   }
 
-  render() {
+  renderTimer(task) {
+    if (this.state.routeName === 'inWork'){
+      return <Timer taskId={task._id}/>;
+    } else {
+      return '';
+    }
+  }
 
+  render() {
     const options = this.statuses.map((option, index) =>
       <option value={option} key={index}>
         {option}
@@ -137,6 +146,7 @@ export default class TasksList extends Component {
         </div>
         <br/>
         <br/>
+          {this.renderTimer(task)}
       </li>
     )
 

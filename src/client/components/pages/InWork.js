@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 
 import TasksList from './../task/TasksList';
-import Timer from './../timer/Timer';
 
 export default class InWork extends Component {
 
@@ -14,9 +13,6 @@ export default class InWork extends Component {
         return (
             <article className="tasks-content">
                 <TasksList {...[this.routeName]} />
-                <article>
-                    <Timer />
-                </article>
             </article>
         )
     }
