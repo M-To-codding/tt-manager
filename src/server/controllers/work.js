@@ -20,7 +20,7 @@ router.put('/inWork/:id', function (req, res) {
         console.log(req.body);
       }
     })
-  } else {
+  } else if (req.body.name) {
     Task.update({_id: req.params.id}, {name: req.body.name}, function (err) {
       if (err) {
         console.log(err);
@@ -29,6 +29,14 @@ router.put('/inWork/:id', function (req, res) {
         Task.find({status: 'IN_WORK'}, function (err, tasks) {
           res.json({tasks});
         });
+      }
+    })
+  } else {
+    Task.update({_id: req.params.id}, {progressTime: req.body.progressTime}, function (err) {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log(req.body);
       }
     })
   }

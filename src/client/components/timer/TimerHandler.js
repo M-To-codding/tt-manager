@@ -50,7 +50,7 @@ export default class TimerHandler {
       id: args.id,
       callback: args.callback,
       needCount: false,
-      seconds: 0
+      seconds: args.seconds || 0
     }
   }
 }
