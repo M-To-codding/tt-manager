@@ -1,38 +1,29 @@
 import React, {Component} from 'react';
 
-import setTime from './timerActions';
+import TimerHandler from './TimerHandler';
 
 export default class Timer extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      isTimerOn: false
+      taskId: props.taskId,
+      time: {}
     }
+    this.timer = TimerHandler.create({id: this.state.taskId, callback: (time) => this.updateTime(time)});
+
   }
 
-  handleTimerOn() {
-    this.setState({
-      isTimerOn: true
-    });
-    setTime();
-  }
-
-  handleTimerOff() {
-    this.setState({
-      isTimerOn: false
-    })
+  updateTime(time) {
+    this.setState({time: time})
   }
 
   render() {
-    const timerBtn = this.state.isTimerOn ? (
-      <div className="timer" onClick={this.handleTimerOff.bind(this)}>0:00</div>
-    ) : (
-      <div className="timer" onClick={this.handleTimerOn.bind(this)}>0:00</div>
-    )
-
     return (
-        <button className="timer-btn -black-bg" onClick={setTime}>0:00</button>
+      <div>
+        <button className="timer-btn -black-bg" onClick={() => this.timer.start()}>{this.state.time.seconds || 'Start'}</button>
+        <button className="reset-timer -red-bg" onClick={() => this.timer.stop()}>stop</button>
+      </div>
     )
   }
 }
