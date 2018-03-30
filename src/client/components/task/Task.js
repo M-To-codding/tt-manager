@@ -4,5 +4,6 @@ export default class Task {
     this.status = data.status;
     this.time = data.time;
     this.date = data.date;
+    this.progressTime = data.progressTime;
   }
 }

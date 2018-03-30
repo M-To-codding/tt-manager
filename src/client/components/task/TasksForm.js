@@ -33,7 +33,8 @@ export default class TasksForm extends Component {
       name: values.name,
       status: 'NEW',
       time: this.currentDate.format('h:mm:ss'),
-      date: this.currentDate.format('DD.MM.YYYY')
+      date: this.currentDate.format('DD.MM.YYYY'),
+      progressTime: 0
     });
     this.setState({
       value: ''
