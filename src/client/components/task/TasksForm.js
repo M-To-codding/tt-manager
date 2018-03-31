@@ -29,12 +29,15 @@ export default class TasksForm extends Component {
 
   handleBtnSubmit(values) {
 
+    console.log(values.estimate);
+
     let task = new Task({
       name: values.name,
       status: 'NEW',
       time: this.currentDate.format('h:mm:ss'),
       date: this.currentDate.format('DD.MM.YYYY'),
-      progressTime: 0
+      progressTime: 0,
+      estimatedTime: values.estimate || 0
     });
     this.setState({
       value: ''
@@ -72,6 +75,17 @@ export default class TasksForm extends Component {
             }}
             onChange={this.handleValueChange}
             required/>
+
+          <span>Estimated time
+            <small>(min)</small>:
+          </span>
+          <Control
+            type="number"
+            min="3.0"
+            className="task-input"
+            model=".estimate"
+            />
+
           <span className="help-block">
               <Errors
                 model=".name"
