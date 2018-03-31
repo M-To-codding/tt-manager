@@ -12,7 +12,7 @@ router.get('/main', function (req, res) {
 
 router.post('/main/add', function (req, res) {
 
-  if (!req.body){
+  if (!req.body) {
     console.log('Tasks is empty!');
     return;
   }
@@ -25,7 +25,7 @@ router.post('/main/add', function (req, res) {
 })
 
 router.put('/main/:id', function (req, res) {
-  if(req.body.status) {
+  if (req.body.status) {
     Task.update({_id: req.params.id}, {status: req.body.status}, function (err) {
       if (err) {
         console.log(err);
@@ -33,8 +33,19 @@ router.put('/main/:id', function (req, res) {
         console.log(req.body);
       }
     })
-  } else {
+  } else if (req.body.name) {
     Task.update({_id: req.params.id}, {name: req.body.name}, function (err) {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log(req.body);
+        Task.find({}, function (err, tasks) {
+          res.json({tasks});
+        });
+      }
+    })
+  } else {
+    Task.update({_id: req.params.id}, {estimatedTime: req.body.estimatedTime}, function (err) {
       if (err) {
         console.log(err);
       } else {
