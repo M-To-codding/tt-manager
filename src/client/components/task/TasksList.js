@@ -84,7 +84,7 @@ export default class TasksList extends Component {
 
   changeName(event) {
 
-    let taskId = event.target.parentNode.parentNode.id,
+    let taskId = event.target.parentNode.parentNode.parentNode.id,
       value = event.target.value;
 
 
@@ -120,7 +120,7 @@ export default class TasksList extends Component {
 
   handleEstimateChange(event) {
 
-    let taskId = event.target.parentNode.parentNode.parentNode.id,
+    let taskId = event.target.parentNode.parentNode.parentNode.parentNode.id,
       value = event.target.value;
 
     console.log('Changed estimate')
