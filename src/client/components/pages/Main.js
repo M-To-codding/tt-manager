@@ -16,8 +16,8 @@ export default class Main extends Component {
         <article className="tasks-content">
 
           <main>
-            <TasksList {...[this.routeName]} />
             <TasksForm/>
+            <TasksList {...[this.routeName]} />
           </main>
 
         </article>
