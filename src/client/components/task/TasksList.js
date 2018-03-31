@@ -110,6 +110,34 @@ export default class TasksList extends Component {
     }
   }
 
+  changeEstimate(event) {
+    console.log(event.target);
+    if(this.state.routeName === 'lists'){
+      return;
+    }
+    event.target.removeAttribute('disabled');
+  }
+
+  handleEstimateChange(event) {
+
+    let taskId = event.target.parentNode.parentNode.parentNode.id,
+      value = event.target.value;
+
+    console.log('Changed estimate')
+    fetch(`/api/v1/${this.state.routeName}/${taskId}`, {
+      method: 'PUT',
+      mode: 'CORS',
+      body: JSON.stringify({estimatedTime: value}),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then((res) => res.json())
+      .then((data) => this.setState({
+          tasks: data.tasks
+        })
+      );
+  }
+
   render() {
 
     const route = this.state.routeName;
@@ -134,6 +162,14 @@ export default class TasksList extends Component {
                   onChange={this.handleStatusChange.bind(this)}>
             {options}
           </select>
+          <span onClick={this.changeEstimate.bind(this)} className="estimate-input">Estimated time:
+            <input type="number"
+                   min="3.0"
+                   name="estimate"
+                   defaultValue={task.estimatedTime || 'unset'}
+                   onChange={this.handleEstimateChange.bind(this)}
+                   disabled="true"/>
+          </span>
         </div>
 
         <br/>
@@ -150,7 +186,7 @@ export default class TasksList extends Component {
         {
           route === 'lists' &&
           <div>
-            <b> {task.progressTime}</b>
+            Spended time: <b>{task.progressTime}</b>
           </div>
         }
         <br/>
