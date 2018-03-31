@@ -4,12 +4,17 @@
     color: #111515;
 }
 
-a {
+a, b {
     color: inherit;
 }
 
 li {
     list-style: none;
+}
+
+small {
+    color: inherit;
+    opacity: 0.85;
 }
 
 /*----------Common---------------*/
@@ -45,19 +50,72 @@ header {
     color: #fff;
 }
 
+.help-block span {
+    color: red;
+    font-size: 14px;
+}
+
 /*--------- Content---------------*/
 
 main {
     width: 100%;
 }
 
+/*------tasks form----------*/
+
+.create-task-form {
+    display: flex;
+    background-color: #424446;
+    max-width: 100%;
+    padding: 15px 20%;
+    margin: auto;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+
+.form-control {
+    width: 220px;
+    margin: 10px 15px;
+}
+
+.form-control>span {
+    color: #fff;
+}
+
+.add-task {
+    width: 130px;
+    height: 36px;
+    display: block;
+    margin: 0 40px;
+    background-color: transparent;
+    border: 2px solid #ffffff;
+    color: #ffffff;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.task-input {
+    height: 28px;
+    width: 100%;
+    border: 1px solid #ffffff;
+    background-color: #000;
+    color: #fff;
+    padding: 0 10px;
+}
+
 /*------tasks list----------*/
 .task-item {
     border: 1px solid #f1f1f1;
-    padding: 8px 20px;
+    padding: 28px 20px;
     line-height: 22px;
+    margin: auto;
+    display: -ms-flexbox;
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
+    max-width: 540px;
+    align-items: center;
 }
 
 .status-select, .timer-btn, .reset-timer {
@@ -66,7 +124,7 @@ main {
     text-align: center;
     color: #fff;
     border: 1px solid #c1c1c1;
-    outline: #000;
+    outline: #7d7d7d;
     margin: 0 10px;
     cursor: pointer;
 }
@@ -94,4 +152,38 @@ main {
 
 .date-time {
     margin-left: 10px;
+    display: inline-block;
+}
+
+.estimate, .estimate[disabled] {
+    border-radius: 13px;
+    height: 24px;
+    width: 67px;
+    border: 2px solid #ccc;
+    text-align: center;
+    padding: 0;
+    background-color: black;
+    color: #fff;
+}
+
+.estimate {
+    border: 2px solid #111515;
+    background-color: #fff;
+    color: #111515;
+}
+
+.task-info {
+
+}
+
+.timer {
+    border-left: 1px solid #ccc;
+    margin-left: auto;
+}
+
+.spended-time {
+    color: #506383;
+    text-align: right;
+    display: inline-block;
+    float: right;
 }

@@ -112,7 +112,7 @@ export default class TasksList extends Component {
 
   changeEstimate(event) {
     console.log(event.target);
-    if(this.state.routeName === 'lists'){
+    if (this.state.routeName === 'lists') {
       return;
     }
     event.target.removeAttribute('disabled');
@@ -151,46 +151,46 @@ export default class TasksList extends Component {
     const listItems = this.state.tasks.map((task, index) =>
       <li key={index} id={task._id} className="task-item">
 
-        <div className="form-group">
-          <span className="task-name">{task.name}</span>
-          <input className="task-name-edit" onChange={this.changeName.bind(this)} defaultValue={task.name} hidden/>
+        <div className="task-info">
+          <div className="form-group">
+            <span className="task-name">{task.name}</span>
+            <input className="task-name-edit" onChange={this.changeName.bind(this)} defaultValue={task.name} hidden/>
 
-          <img src="https://cdn0.iconfinder.com/data/icons/basic-line-5/1024/edit-128.png"
-               alt="rename" className="edit" onClick={this.showEditInput}/>
+            <img src="https://cdn0.iconfinder.com/data/icons/basic-line-5/1024/edit-128.png"
+                 alt="rename" className="edit" onClick={this.showEditInput}/>
 
-          <select id={"select-" + task._id} defaultValue={task.status} className="status-select -gray-bg"
-                  onChange={this.handleStatusChange.bind(this)}>
-            {options}
-          </select>
-          <span onClick={this.changeEstimate.bind(this)} className="estimate-input">Estimated time:
+            <select id={"select-" + task._id} defaultValue={task.status} className="status-select -gray-bg"
+                    onChange={this.handleStatusChange.bind(this)}>
+              {options}
+            </select>
+            <span onClick={this.changeEstimate.bind(this)} className="estimate-input">Estimated time:
             <input type="number"
                    min="3.0"
                    name="estimate"
+                   className="estimate"
                    defaultValue={task.estimatedTime || 'unset'}
                    onChange={this.handleEstimateChange.bind(this)}
                    disabled="true"/>
           </span>
-        </div>
-
-        <br/>
-
-        <div className="date-time">
-          <small>
-            {task.date},&nbsp;
-          </small>
-
-          <small>
-            {task.time}
-          </small>
-        </div>
-        {
-          route === 'lists' &&
-          <div>
-            Spended time: <b>{task.progressTime}</b>
           </div>
-        }
-        <br/>
-        <br/>
+
+          <div className="date-time">
+            <small>
+              {task.date},&nbsp;
+            </small>
+
+            <small>
+              {task.time}
+            </small>
+          </div>
+          {
+            route === 'lists' &&
+            <div className="spended-time">
+              Spended time: <b>{task.progressTime}</b>
+            </div>
+          }
+        </div>
+
         {this.renderTimer(task)}
       </li>
     )

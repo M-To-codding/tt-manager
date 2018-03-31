@@ -36,8 +36,8 @@ export default class Timer extends Component {
 
   render() {
     return (
-      <div>
-        <button className="timer-btn -black-bg"
+      <div className="timer">
+        <button className="timer-btn -gray-bg"
                 onClick={() => this.timer.start()}>{this.state.time.seconds || 'Start'}</button>
         <button className="reset-timer -red-bg" onMouseDown={() => this.saveTime(this.state.time)} onClick={() => this.timer.stop()}>stop</button>
       </div>

@@ -62,8 +62,9 @@ export default class TasksForm extends Component {
     return (
       <LocalForm
         onSubmit={(values) => this.handleBtnSubmit(values)}
+        className="create-task-form"
       >
-        <label>
+        <div className="form-control">
           <span>Task name: {this.state.value}</span>
           <br/>
           <Control.text
@@ -75,8 +76,16 @@ export default class TasksForm extends Component {
             }}
             onChange={this.handleValueChange}
             required/>
-
-          <span>Estimated time
+          <Errors
+            model=".name"
+            className="help-block"
+            messages={{
+              required: 'Write task name'
+            }}
+          />
+        </div>
+        <div className="form-control">
+        <span>Estimated time
             <small>(min)</small>:
           </span>
           <Control
@@ -84,19 +93,10 @@ export default class TasksForm extends Component {
             min="3.0"
             className="task-input"
             model=".estimate"
-            />
-
-          <span className="help-block">
-              <Errors
-                model=".name"
-                messages={{
-                  required: 'Write task name'
-                }}
-              />
-            </span>
-        </label>
+          />
+        </div>
         <input
-          type="submit" value="Add task"/>
+          type="submit" value="Add task" className="add-task"/>
       </LocalForm>
     )
   }
