@@ -30,10 +30,10 @@ export default class TasksList extends Component {
       }))
   }
 
-  handleStatusChange(event) {
-    event.preventDefault();
+  handleStatusChange(event, task) {
+    // event.preventDefault();
 
-    let taskId = event.target.parentNode.parentNode.id,
+    let taskId = task._id,
       elems = event.target.childNodes,
       elemStatus = '';
 
@@ -58,15 +58,15 @@ export default class TasksList extends Component {
     })
   }
 
-  showEditInput(event) {
+  showEditInput(event, task) {
     let elems = event.target.parentNode.childNodes,
       hiddenInput = '',
-      task = '';
+      taskElem = '';
 
     for (let i = 0; i < elems.length; i++) {
 
       if (elems[i].classList.contains('task-name')) {
-        task = elems[i];
+        taskElem = elems[i];
       }
       if (elems[i].classList.contains('task-name-edit')) {
         hiddenInput = elems[i];
@@ -82,9 +82,9 @@ export default class TasksList extends Component {
     }
   }
 
-  changeName(event) {
+  changeName(event, task) {
 
-    let taskId = event.target.parentNode.parentNode.parentNode.id,
+    let taskId = task._id,
       value = event.target.value;
 
 
@@ -110,17 +110,16 @@ export default class TasksList extends Component {
     }
   }
 
-  changeEstimate(event) {
-    console.log(event.target);
+  changeEstimate(event, task) {
     if (this.state.routeName === 'lists') {
       return;
     }
     event.target.removeAttribute('disabled');
   }
 
-  handleEstimateChange(event) {
+  handleEstimateChange(event, task) {
 
-    let taskId = event.target.parentNode.parentNode.parentNode.parentNode.id,
+    let taskId = task._id,
       value = event.target.value;
 
     console.log('Changed estimate')
@@ -138,6 +137,29 @@ export default class TasksList extends Component {
       );
   }
 
+  removeTask(task) {
+    let confirmed = window.confirm('Confirm delete task ' + task.name),
+      taskId = task._id;
+
+  if(!confirmed){
+   return;
+  } else {
+    fetch(`/api/v1/${this.state.routeName}/delete/${taskId}`, {
+      method: 'DELETE',
+      body: JSON.stringify({task: task}),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then((res) => res.json())
+      .then((data) => this.setState({
+          tasks: data.tasks
+        })
+      );
+    console.log('Deleted!');
+  }
+
+  }
+
   render() {
 
     const route = this.state.routeName;
@@ -149,27 +171,27 @@ export default class TasksList extends Component {
     )
 
     const listItems = this.state.tasks.map((task, index) =>
-      <li key={index} id={task._id} className="task-item">
+      <li key={task._id} className="task-item">
 
         <div className="task-info">
           <div className="form-group">
             <span className="task-name">{task.name}</span>
-            <input className="task-name-edit" onChange={this.changeName.bind(this)} defaultValue={task.name} hidden/>
+            <input className="task-name-edit" onChange={(event) => this.changeName(event, task)} defaultValue={task.name} hidden/>
 
             <img src="https://cdn0.iconfinder.com/data/icons/basic-line-5/1024/edit-128.png"
                  alt="rename" className="edit" onClick={this.showEditInput}/>
 
             <select id={"select-" + task._id} defaultValue={task.status} className="status-select -gray-bg"
-                    onChange={this.handleStatusChange.bind(this)}>
+                    onChange={(event) => this.handleStatusChange(event, task)}>
               {options}
             </select>
-            <span onClick={this.changeEstimate.bind(this)} className="estimate-input">Estimated time:
+            <span onClick={(event) => this.changeEstimate(event)} className="estimate-input">Estimated time:
             <input type="number"
                    min="3.0"
                    name="estimate"
                    className="estimate"
                    defaultValue={task.estimatedTime || 'unset'}
-                   onChange={this.handleEstimateChange.bind(this)}
+                   onChange={(event) => this.handleEstimateChange(event, task)}
                    disabled="true"/>
           </span>
           </div>
@@ -192,6 +214,10 @@ export default class TasksList extends Component {
         </div>
 
         {this.renderTimer(task)}
+
+        <div className="delete-elem" onClick={() => this.removeTask(task)}>
+          x
+        </div>
       </li>
     )
 

@@ -58,5 +58,18 @@ router.put('/main/:id', function (req, res) {
   }
 })
 
-
+router.delete('/main/delete/:id', function (req, res) {
+    Task.findByIdAndRemove(req.params.id, (err, task) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log('Removed! ');
+        Task.find({}, function (err, tasks) {
+          res.json({tasks});
+          console.log('Server: main controller get: ');
+          console.log(tasks);
+        })
+      }
+    })
+})
 module.exports = router;
