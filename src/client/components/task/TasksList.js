@@ -141,22 +141,25 @@ export default class TasksList extends Component {
     let confirmed = window.confirm('Confirm delete task ' + task.name),
       taskId = task._id;
 
-  if(!confirmed){
-   return;
-  } else {
-    fetch(`/api/v1/${this.state.routeName}/delete/${taskId}`, {
-      method: 'DELETE',
-      body: JSON.stringify({task: task}),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    }).then((res) => res.json())
-      .then((data) => this.setState({
-          tasks: data.tasks
-        })
-      );
-    console.log('Deleted!');
+    if (!confirmed) {
+      return;
+    } else {
+      fetch(`/api/v1/${this.state.routeName}/delete/${taskId}`, {
+        method: 'DELETE',
+        body: JSON.stringify({task: task}),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }).then((res) => res.json())
+        .then((data) => this.setState({
+            tasks: data.tasks
+          })
+        );
+      console.log('Deleted!');
+    }
   }
+
+  showTaskInfo(task) {
 
   }
 
@@ -171,12 +174,13 @@ export default class TasksList extends Component {
     )
 
     const listItems = this.state.tasks.map((task, index) =>
-      <li key={task._id} className="task-item">
+      <li key={task._id} className="task-item" onClick={() => this.showTaskInfo(task)}>
 
         <div className="task-info">
           <div className="form-group">
             <span className="task-name">{task.name}</span>
-            <input className="task-name-edit" onChange={(event) => this.changeName(event, task)} defaultValue={task.name} hidden/>
+            <input className="task-name-edit" onChange={(event) => this.changeName(event, task)}
+                   defaultValue={task.name} hidden/>
 
             <img src="https://cdn0.iconfinder.com/data/icons/basic-line-5/1024/edit-128.png"
                  alt="rename" className="edit" onClick={this.showEditInput}/>
@@ -216,7 +220,7 @@ export default class TasksList extends Component {
         {this.renderTimer(task)}
 
         <div className="delete-elem" onClick={() => this.removeTask(task)}>
-          x
+          &#215;
         </div>
       </li>
     )

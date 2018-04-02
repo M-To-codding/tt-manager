@@ -6,7 +6,8 @@ const taskSchema = new mongoose.Schema({
   time: String,
   date: String,
   progressTime: String,
-  estimatedTime: String
+  estimatedTime: String,
+  description: String
 });
 
 module.exports = mongoose.model('Task', taskSchema);

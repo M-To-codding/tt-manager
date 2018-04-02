@@ -6,5 +6,6 @@ export default class Task {
     this.date = data.date;
     this.progressTime = data.progressTime;
     this.estimatedTime = data.estimatedTime;
+    this.description = data.description;
   }
 }

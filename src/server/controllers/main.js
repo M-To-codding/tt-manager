@@ -44,8 +44,19 @@ router.put('/main/:id', function (req, res) {
         });
       }
     })
-  } else {
+  } else if (req.body.estimatedTime) {
     Task.update({_id: req.params.id}, {estimatedTime: req.body.estimatedTime}, function (err) {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log(req.body);
+        Task.find({}, function (err, tasks) {
+          res.json({tasks});
+        });
+      }
+    })
+  } else if (req.body.description) {
+    Task.update({_id: req.params.id}, {estimatedTime: req.body.description}, function (err) {
       if (err) {
         console.log(err);
       } else {

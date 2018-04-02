@@ -37,7 +37,8 @@ export default class TasksForm extends Component {
       time: this.currentDate.format('h:mm:ss'),
       date: this.currentDate.format('DD.MM.YYYY'),
       progressTime: 0,
-      estimatedTime: values.estimate || 0
+      estimatedTime: values.estimate || 0,
+      description: values.description || ''
     });
     this.setState({
       value: ''
@@ -93,6 +94,14 @@ export default class TasksForm extends Component {
             min="3.0"
             className="task-input"
             model=".estimate"
+          />
+        </div>
+        <div className="form-control">
+        <span> Add description:
+          </span>
+          <Control.textarea
+            className="task-input -textarea"
+            model=".description"
           />
         </div>
         <input
