@@ -27,9 +27,32 @@ export default class TasksForm extends Component {
     });
   }
 
-  handleBtnSubmit(values) {
+  hourToSeconds(hour) {
+    if (!hour || parseInt(hour) === 0) {
+      return 0;
+    }
 
-    console.log(values.estimate);
+    let minutes = parseInt(hour) * 60;
+
+    return this.minuteToSeconds(minutes);
+
+  }
+
+  minuteToSeconds(minute) {
+    if (!minute || parseInt(minute) === 0) {
+      return 0;
+    }
+
+
+    console.log(parseInt(minute) * 60);
+    return parseInt(minute) * 60;
+  }
+
+  handleBtnSubmit(values) {
+    let hours = this.hourToSeconds(values.estimatedHour || 0),
+      minutes = this.minuteToSeconds(values.estimatedMin || 0),
+      estimate = parseInt(hours + minutes);
+    console.log(estimate);
 
     let task = new Task({
       name: values.name,
@@ -37,7 +60,7 @@ export default class TasksForm extends Component {
       time: this.currentDate.format('h:mm:ss'),
       date: this.currentDate.format('DD.MM.YYYY'),
       progressTime: 0,
-      estimatedTime: values.estimate || 0,
+      estimatedTime: estimate || 0,
       description: values.description || ''
     });
     this.setState({
@@ -108,18 +131,18 @@ export default class TasksForm extends Component {
             <small>(hours)</small>
             <Control
               type="number"
-              min="3.0"
+              min="0"
               className="task-input"
-              model=".estimate"
+              model=".estimatedHour"
             />
           </p>
           <p className="-estimate">
             <small>(min)</small>
             <Control
               type="number"
-              min="3.0"
+              min="0"
               className="task-input"
-              model=".estimated-min"
+              model=".estimatedMin"
             />
           </p>
         </div>
