@@ -177,19 +177,27 @@ export default class TasksList extends Component {
       <li key={task._id} className="task-item" onClick={() => this.showTaskInfo(task)}>
 
         <div className="task-info">
+
           <div className="form-group">
-            <span className="task-name">{task.name}</span>
-            <input className="task-name-edit" onChange={(event) => this.changeName(event, task)}
-                   defaultValue={task.name} hidden/>
+            <div className="">
+              <p className="task-name">{task.name}</p>
+              <input className="task-name-edit" onChange={(event) => this.changeName(event, task)}
+                     defaultValue={task.name} hidden/>
 
-            <img src="https://cdn0.iconfinder.com/data/icons/basic-line-5/1024/edit-128.png"
-                 alt="rename" className="edit" onClick={this.showEditInput}/>
+              <img src="https://cdn0.iconfinder.com/data/icons/basic-line-5/1024/edit-128.png"
+                   alt="rename" className="edit" onClick={this.showEditInput}/>
+            </div>
 
-            <select id={"select-" + task._id} defaultValue={task.status} className="status-select -gray-bg"
+          </div>
+
+          <div>
+            <select id={"select-" + task._id} defaultValue={task.status} className="status-select -transp-bg"
                     onChange={(event) => this.handleStatusChange(event, task)}>
               {options}
             </select>
-            <span onClick={(event) => this.changeEstimate(event)} className="estimate-input">Estimated time:
+
+            <span onClick={(event) => this.changeEstimate(event)} className="estimate-input">
+              E. time:
             <input type="number"
                    min="3.0"
                    name="estimate"
@@ -198,26 +206,28 @@ export default class TasksList extends Component {
                    onChange={(event) => this.handleEstimateChange(event, task)}
                    disabled="true"/>
           </span>
-          </div>
 
-          <div className="date-time">
-            <small>
-              {task.date},&nbsp;
-            </small>
+            {
+              route === 'lists' &&
+              <div className="spended-time">
+                S. time: <b>{task.progressTime}</b>
+              </div>
+            }
 
-            <small>
-              {task.time}
-            </small>
+            {this.renderTimer(task)}
+
           </div>
-          {
-            route === 'lists' &&
-            <div className="spended-time">
-              Spended time: <b>{task.progressTime}</b>
-            </div>
-          }
         </div>
 
-        {this.renderTimer(task)}
+        <div className="date-time">
+          <p>
+            <small>{task.time}</small>
+          </p>
+          <hr/>
+          <p>
+            <small>{task.date}</small>
+          </p>
+        </div>
 
         <div className="delete-elem" onClick={() => this.removeTask(task)}>
           &#215;

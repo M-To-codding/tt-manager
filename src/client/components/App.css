@@ -1,7 +1,8 @@
 /*-------Normalize----------*/
 
-*{
-    color: #111515;
+* {
+    color: #3d4973;
+    box-sizing: border-box;
 }
 
 a, b {
@@ -17,6 +18,22 @@ small {
     opacity: 0.85;
 }
 
+.input[type="button"], button {
+    cursor: pointer;
+}
+
+hr {
+    margin: 1px 0;
+}
+
+span, div {
+    color: inherit;
+}
+
+:focus {
+    outline: none;
+}
+
 /*----------Common---------------*/
 
 .container {
@@ -25,7 +42,6 @@ small {
     margin: auto;
     padding-top: 50px;
 }
-
 
 .router-content {
     display: flex;
@@ -41,10 +57,11 @@ header {
     background-color: #000;
     color: #fff;
 }
-.-gray-bg {
-    background-color: #4c4c4c;
-    color: #fff;
+
+.-transp-bg {
+    background-color: transparent;
 }
+
 .-red-bg {
     background-color: #dc0012;
     color: #fff;
@@ -53,6 +70,14 @@ header {
 .help-block span {
     color: red;
     font-size: 14px;
+}
+
+.delete-elem {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: #dc0012;
+    cursor: pointer;
 }
 
 /*--------- Content---------------*/
@@ -65,10 +90,10 @@ main {
 
 .create-task-form {
     display: flex;
-    background-color: #424446;
-    max-width: 100%;
-    padding: 15px 20%;
+    background-color: #a1add6;
+    padding: 15px 20px;
     margin: auto;
+    color: #fff;
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
     -ms-flex-pack: center;
@@ -76,12 +101,18 @@ main {
 }
 
 .form-control {
-    width: 220px;
+    width: 180px;
     margin: 10px 15px;
 }
 
-.form-control>span {
+.form-control > p {
     color: #fff;
+    margin: 0 2px;
+}
+
+.task-name-preview {
+    margin: 0;
+    height: 18px;
 }
 
 .add-task {
@@ -89,20 +120,62 @@ main {
     height: 36px;
     display: block;
     margin: 0 40px;
-    background-color: transparent;
-    border: 2px solid #ffffff;
+    background: rgba(161,173,214,0);
+    background: -moz-linear-gradient(-45deg, rgba(161,173,214,0) 0%, rgba(172,186,230,1) 50%, rgba(161,173,214,0) 100%);
+    background: -webkit-gradient(left top, right bottom, color-stop(0%, rgba(161,173,214,0)), color-stop(50%, rgba(172,186,230,1)), color-stop(100%, rgba(161,173,214,0)));
+    background: -webkit-linear-gradient(-45deg, rgba(161,173,214,0) 0%, rgba(172,186,230,1) 50%, rgba(161,173,214,0) 100%);
+    background: -o-linear-gradient(-45deg, rgba(161,173,214,0) 0%, rgba(172,186,230,1) 50%, rgba(161,173,214,0) 100%);
+    background: -ms-linear-gradient(-45deg, rgba(161,173,214,0) 0%, rgba(172,186,230,1) 50%, rgba(161,173,214,0) 100%);
+    background: linear-gradient(135deg, rgba(161,173,214,0) 0%, rgba(172,186,230,1) 50%, rgba(161,173,214,0) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a1add6', endColorstr='#a1add6', GradientType=1 );
+    border: 2px solid rgba(255, 255, 255, 0.51);
     color: #ffffff;
     font-weight: 800;
     cursor: pointer;
 }
+.add-task:hover {
+    border-color: #fff;
+}
 
 .task-input {
-    height: 28px;
+    height: 30px;
     width: 100%;
-    border: 1px solid #ffffff;
-    background-color: #000;
+    border: 1px solid rgba(255, 255, 255, 0.51);
+    background-color: #a1add6;
+    background: rgba(161,173,214,0);
+    background: -moz-linear-gradient(-45deg, rgba(161,173,214,0) 0%, rgba(172,186,230,1) 50%, rgba(161,173,214,0) 100%);
+    background: -webkit-gradient(left top, right bottom, color-stop(0%, rgba(161,173,214,0)), color-stop(50%, rgba(172,186,230,1)), color-stop(100%, rgba(161,173,214,0)));
+    background: -webkit-linear-gradient(-45deg, rgba(161,173,214,0) 0%, rgba(172,186,230,1) 50%, rgba(161,173,214,0) 100%);
+    background: -o-linear-gradient(-45deg, rgba(161,173,214,0) 0%, rgba(172,186,230,1) 50%, rgba(161,173,214,0) 100%);
+    background: -ms-linear-gradient(-45deg, rgba(161,173,214,0) 0%, rgba(172,186,230,1) 50%, rgba(161,173,214,0) 100%);
+    background: linear-gradient(135deg, rgba(161,173,214,0) 0%, rgba(172,186,230,1) 50%, rgba(161,173,214,0) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a1add6', endColorstr='#a1add6', GradientType=1 );
     color: #fff;
-    padding: 0 10px;
+    padding: 5px 10px;
+}
+
+.task-input:focus, .task-input:hover {
+    border: 1px solid #fff;
+}
+
+.-estimate {
+    width: 80px;
+    display: inline-block;
+}
+
+.-textarea {
+    height: 60px;
+    max-height: 100px;
+    width: 100%;
+    max-width: 100%;
+}
+
+.form-title {
+    display: block;
+    width: 100%;
+    text-align: center;
+    color: #fff;
+    font-size: 23px;
 }
 
 /*------tasks list----------*/
@@ -116,23 +189,30 @@ main {
     flex-wrap: wrap;
     max-width: 540px;
     align-items: center;
+    position: relative;
 }
 
-.status-select, .timer-btn, .reset-timer {
+.status-select, .timer-btn, .stop-timer {
     height: 30px;
-    width: 100px;
+    font-size: 11px;
+    width: 90px;
     text-align: center;
-    color: #fff;
-    border: 1px solid #c1c1c1;
+    border: 1px solid #6a7cbb;
+    color: #6a7cbb;
     outline: #7d7d7d;
-    margin: 0 10px;
+    margin: 0 6px;
     cursor: pointer;
 }
 
-.timer-btn, .reset-timer {
+.timer-btn, .stop-timer {
     border-radius: 50%;
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
+}
+
+.stop-timer {
+    color: #fff;
+    border: none;
 }
 
 .status-select option {
@@ -140,7 +220,10 @@ main {
 }
 
 .task-name {
-    margin: 0 10px;
+    margin: 0 5px 5px 0;
+    display: inline-block;
+    max-width: 380px;
+    width: auto;
     vertical-align: -webkit-baseline-middle;
 }
 
@@ -151,34 +234,47 @@ main {
 }
 
 .date-time {
-    margin-left: 10px;
-    display: inline-block;
+    margin-left: auto;
+    display: block;
+    padding: 0 5px;
+    text-align: center;
+    font-size: 13px;
+    line-height: 13px;
+}
+
+.date-time p {
+    margin: 0;
 }
 
 .estimate, .estimate[disabled] {
     border-radius: 13px;
     height: 24px;
     width: 67px;
-    border: 2px solid #ccc;
+    border: none;
     text-align: center;
     padding: 0;
-    background-color: black;
+    background-color: #6a7cbb;
     color: #fff;
+    cursor: pointer;
 }
 
 .estimate {
-    border: 2px solid #111515;
+    border: 2px solid #6a7cbb;
     background-color: #fff;
     color: #111515;
+    cursor: text;
 }
 
 .task-info {
-
+    width: 83%;
 }
 
 .timer {
     border-left: 1px solid #ccc;
-    margin-left: auto;
+    width: 180px;
+    padding-left: 8px;
+    display: inline-block;
+    margin-left: 10px;
 }
 
 .spended-time {

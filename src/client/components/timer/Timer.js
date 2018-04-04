@@ -11,7 +11,11 @@ export default class Timer extends Component {
       taskId: props.taskId,
       time: {seconds: props.progressTime}
     }
-    this.timer = TimerHandler.create({id: this.state.taskId, callback: (time) => this.updateTime(time), seconds: this.state.time.seconds});
+    this.timer = TimerHandler.create({
+      id: this.state.taskId,
+      callback: (time) => this.updateTime(time),
+      seconds: this.state.time.seconds
+    });
 
   }
 
@@ -37,9 +41,12 @@ export default class Timer extends Component {
   render() {
     return (
       <div className="timer">
-        <button className="timer-btn -gray-bg"
-                onClick={() => this.timer.start()}>{this.state.time.seconds || 'Start'}</button>
-        <button className="reset-timer -red-bg" onMouseDown={() => this.saveTime(this.state.time)} onClick={() => this.timer.stop()}>stop</button>
+        S. time:
+        <button className="timer-btn -transp-bg"
+                onClick={() => this.timer.start()}><b>{this.state.time.seconds || 'Start'}</b></button>
+        <button className="stop-timer -red-bg" onMouseDown={() => this.saveTime(this.state.time)}
+                onClick={() => this.timer.stop()}><b>stop</b>
+        </button>
       </div>
     )
   }

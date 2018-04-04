@@ -58,16 +58,24 @@ export default class TasksForm extends Component {
     });
   }
 
+  toggleShowForm(event) {
+
+  }
+
   render() {
 
     return (
       <LocalForm
         onSubmit={(values) => this.handleBtnSubmit(values)}
+        onClick={(event) => this.toggleShowForm(event)}
         className="create-task-form"
       >
+        <h3 className="form-title">Create new task</h3>
         <div className="form-control">
-          <span>Task name: {this.state.value}</span>
-          <br/>
+
+          <span>Task name:</span>
+          <p className="task-name-preview">{this.state.value}</p>
+
           <Control.text
             className="task-input"
             model=".name"
@@ -86,23 +94,34 @@ export default class TasksForm extends Component {
           />
         </div>
         <div className="form-control">
-        <span>Estimated time
-            <small>(min)</small>:
-          </span>
-          <Control
-            type="number"
-            min="3.0"
-            className="task-input"
-            model=".estimate"
-          />
-        </div>
-        <div className="form-control">
         <span> Add description:
           </span>
           <Control.textarea
             className="task-input -textarea"
             model=".description"
           />
+        </div>
+        <div className="form-control">
+          <p>Estimated time:
+          </p>
+          <p className="-estimate">
+            <small>(hours)</small>
+            <Control
+              type="number"
+              min="3.0"
+              className="task-input"
+              model=".estimate"
+            />
+          </p>
+          <p className="-estimate">
+            <small>(min)</small>
+            <Control
+              type="number"
+              min="3.0"
+              className="task-input"
+              model=".estimated-min"
+            />
+          </p>
         </div>
         <input
           type="submit" value="Add task" className="add-task"/>
