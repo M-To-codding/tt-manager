@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 
 import {statusFilters} from '../../actions/statuses';
 import Timer from './../timer/Timer';
+import createModal from './modalWindow';
 
 export default class TasksList extends Component {
 
@@ -118,6 +119,7 @@ export default class TasksList extends Component {
   }
 
   handleEstimateChange(event, task) {
+    event.preventDefault();
 
     let taskId = task._id,
       value = event.target.value;
@@ -159,8 +161,26 @@ export default class TasksList extends Component {
     }
   }
 
-  showTaskInfo(task) {
+  saveDescription(event, task) {
+    event.preventDefault();
 
+    let taskId = task._id,
+      value = event.target.value;
+
+    console.log(event.target)
+
+    fetch(`/api/v1/${this.state.routeName}/${taskId}`, {
+      method: 'PUT',
+      mode: 'CORS',
+      body: JSON.stringify({description: value}),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then((res) => res.json())
+      .then((data) => this.setState({
+          tasks: data.tasks
+        })
+      );
   }
 
   render() {
@@ -174,7 +194,7 @@ export default class TasksList extends Component {
     )
 
     const listItems = this.state.tasks.map((task, index) =>
-      <li key={task._id} className="task-item" onClick={() => this.showTaskInfo(task)}>
+      <li key={task._id} className="task-item">
 
         <div className="task-info">
 
@@ -187,7 +207,6 @@ export default class TasksList extends Component {
               <img src="https://cdn0.iconfinder.com/data/icons/basic-line-5/1024/edit-128.png"
                    alt="rename" className="edit" onClick={this.showEditInput}/>
             </div>
-
           </div>
 
           <div>
@@ -217,6 +236,11 @@ export default class TasksList extends Component {
             {this.renderTimer(task)}
 
           </div>
+          <button className="show-description"
+                  onClick={(event) => createModal(event, task, (event)=>this.saveDescription(event, task))}>
+            Show description
+          </button>
+
         </div>
 
         <div className="date-time">
@@ -237,6 +261,7 @@ export default class TasksList extends Component {
 
     return (
       <ul className="tasks-list">{listItems}</ul>
+
     )
   }
 
