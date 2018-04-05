@@ -289,6 +289,44 @@ main {
     float: right;
 }
 
+.show-description {
+    display: block;
+    width: initial;
+    background: none;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    margin-top: 13px;
+    text-align: left;
+}
+
+
+.modal-window {
+    display: block;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    left: 0;
+    right:0;
+    margin:auto;
+    top: 0;
+    bottom: 0;
+    background-color: rgba(16, 19, 29, 0.53);
+}
+
+.modal-window-content {
+    display: block;
+    width: 500px;
+    min-height: 140px;
+    padding: 10px 20px;
+    height: auto;
+    left: 0;
+    right:0;
+    margin:auto;
+    margin-top: 10%;
+    position: relative;
+    background-color: #fff;
+}
+
 .progress-bar {
   border-left: 1px solid #ccc;
   padding: 0 10px;

@@ -7,6 +7,7 @@ router.get('/main', function (req, res) {
     res.json({tasks});
     console.log('Server: main controller get: ');
     console.log(tasks);
+    res.send('ok', 200);
   })
 })
 
@@ -56,7 +57,7 @@ router.put('/main/:id', function (req, res) {
       }
     })
   } else if (req.body.description) {
-    Task.update({_id: req.params.id}, {estimatedTime: req.body.description}, function (err) {
+    Task.update({_id: req.params.id}, {description: req.body.description}, function (err) {
       if (err) {
         console.log(err);
       } else {
