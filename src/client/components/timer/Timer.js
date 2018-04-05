@@ -9,29 +9,25 @@ export default class Timer extends Component {
     this.state = {
       routeName: props.routeName,
       taskId: props.taskId,
-      time: {seconds: props.progressTime}
     }
     this.timer = TimerHandler.create({
       id: this.state.taskId,
       callback: (time) => this.updateTime(time),
-      seconds: this.state.time.seconds
+      seconds: this.props.time
     });
 
   }
 
   updateTime(time) {
-    this.setState({time: time});
+    this.props.onUpdate(time.seconds);
   }
 
   saveTime(time) {
-
-    console.log(time.seconds);
-
     console.log(this.state);
     fetch(`/api/v1/${this.state.routeName}/${this.state.taskId}`, {
       method: 'PUT',
       mode: 'CORS',
-      body: JSON.stringify({progressTime: time.seconds.toString()}),
+      body: JSON.stringify({progressTime: this.props.time.toString()}),
       headers: {
         'Content-Type': 'application/json'
       }
@@ -43,7 +39,7 @@ export default class Timer extends Component {
       <div className="timer">
         S. time:
         <button className="timer-btn -transp-bg"
-                onClick={() => this.timer.start()}><b>{this.state.time.seconds || 'Start'}</b></button>
+                onClick={() => this.timer.start()}><b>{this.props.time || 'Start'}</b></button>
         <button className="stop-timer -red-bg" onMouseDown={() => this.saveTime(this.state.time)}
                 onClick={() => this.timer.stop()}><b>stop</b>
         </button>

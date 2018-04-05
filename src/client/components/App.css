@@ -115,6 +115,11 @@ main {
     height: 18px;
 }
 
+.tasks-list.inWork .task-item {
+  margin: 0;
+  max-width: 740px;
+}
+
 .add-task {
     width: 130px;
     height: 36px;
@@ -282,4 +287,22 @@ main {
     text-align: right;
     display: inline-block;
     float: right;
+}
+
+.progress-bar {
+  border-left: 1px solid #ccc;
+  padding: 0 10px;
+  width: 100px;
+  line-height: 50px;
+}
+
+.progress-bar .frame {
+  display: inline-block;
+  vertical-align: middle;
+  height: 30px;
+  width: inherit;
+}
+
+.progress-bar .frame .progress {
+  height: 30px;
 }

@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 
 import {statusFilters} from '../../actions/statuses';
 import Timer from './../timer/Timer';
+import ProgressBar from './../progress-bar/ProgressBar';
 
 export default class TasksList extends Component {
 
@@ -104,7 +105,28 @@ export default class TasksList extends Component {
 
   renderTimer(task) {
     if (this.state.routeName === 'inWork') {
-      return <Timer taskId={task._id} progressTime={task.progressTime} routeName={this.state.routeName}/>;
+      return <Timer
+                taskId={task._id}
+                time={task.progressTime}
+                onUpdate={(newProgressTime)=> this.updateTaskProgressTime(task._id, newProgressTime)}
+                routeName={this.state.routeName} />;
+    } else {
+      return '';
+    }
+  }
+
+  updateTaskProgressTime(taskId, newProgressTime) {
+    const newTasks = this.state.tasks.slice(0);
+    const taskToUpdate = newTasks.find(function(task) {
+      return task._id == taskId;
+    });
+    taskToUpdate.progressTime = newProgressTime;
+    this.setState({tasks: newTasks});
+  }
+
+  renderProgressBar(task) {
+    if (this.state.routeName === 'inWork') {
+      return <ProgressBar total={task.estimatedTime} progress={task.progressTime} />;
     } else {
       return '';
     }
@@ -120,13 +142,19 @@ export default class TasksList extends Component {
   handleEstimateChange(event, task) {
 
     let taskId = task._id,
-      value = event.target.value;
+      newEstimatedTime = event.target.value;
 
-    console.log('Changed estimate')
+    const newTasks = this.state.tasks.slice(0);
+    const taskToUpdate = newTasks.find(function(task) {
+      return task._id == taskId;
+    });
+    taskToUpdate.estimatedTime = newEstimatedTime;
+    this.setState({tasks: newTasks});
+
     fetch(`/api/v1/${this.state.routeName}/${taskId}`, {
       method: 'PUT',
       mode: 'CORS',
-      body: JSON.stringify({estimatedTime: value}),
+      body: JSON.stringify({estimatedTime: newEstimatedTime}),
       headers: {
         'Content-Type': 'application/json'
       }
@@ -215,6 +243,7 @@ export default class TasksList extends Component {
             }
 
             {this.renderTimer(task)}
+            {this.renderProgressBar(task)}
 
           </div>
         </div>
@@ -236,7 +265,7 @@ export default class TasksList extends Component {
     )
 
     return (
-      <ul className="tasks-list">{listItems}</ul>
+      <ul className={'tasks-list ' + route}>{listItems}</ul>
     )
   }
 
