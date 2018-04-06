@@ -9,6 +9,7 @@ import {
 import Lists from './pages/Lists';
 import InWork from './pages/InWork';
 import Main from './pages/Main';
+import GroupDetails from './pages/GroupDetails';
 
 
 class App extends Component {
@@ -49,8 +50,14 @@ class App extends Component {
             />
 
             <Route
+              exact
               path="/lists"
               component={Lists}
+            />
+
+            <Route
+              path="/group/:id"
+              component={GroupDetails}
             />
 
           </main>

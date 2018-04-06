@@ -1,4 +1,8 @@
 import React, {Component} from 'react';
+import {
+  Link
+} from 'react-router-dom';
+
 
 export default class GroupsList extends Component {
 
@@ -38,7 +42,7 @@ export default class GroupsList extends Component {
         }
       }).then((res) => res.json())
         .then((data) => this.setState({
-          groups: data.groups
+            groups: data.groups
           })
         );
       console.log('Deleted!');
@@ -55,33 +59,34 @@ export default class GroupsList extends Component {
 
       listItems = this.state.groups.map((group, index) =>
         <li key={group._id} className="group-item">
+          <Link to={`/group/${group._id}`}>
+            <div className="group-info">
 
-          <div className="group-info">
+              <div className="form-group">
+                <img src="http://icons.iconarchive.com/icons/media-design/hydropro-v2/512/Folder-icon.png"
+                     alt="rename" className="group-icon"/>
+                <span className="group-name">{group.name}</span>
+              </div>
 
-            <div className="form-group">
-              <img src="http://icons.iconarchive.com/icons/media-design/hydropro-v2/512/Folder-icon.png"
-                   alt="rename" className="group-icon"/>
-              <span className="group-name">{group.name}</span>
-              <input className="group-name-edit" onChange={(event) => this.changeName(event, group)}
-                     defaultValue={group.name} hidden/>
+            </div>
+            <div className="date-time">
+              <small>{group.time},</small>
+              <small>{group.date}</small>
             </div>
 
-          </div>
-          <div className="date-time">
-              <small>{group.time}, </small>
-              <small>{group.date}</small>
-          </div>
-
-          <div className="delete-elem" onClick={(event)=>this.removeGroup(event, group)}>
-          &#215;
-          </div>
+            <div className="delete-elem" onClick={(event) => this.removeGroup(event, group)}>
+              &#215;
+            </div>
+          </Link>
         </li>
       )
 
     }
 
     return (
-      <ul className={'group-list'}>{listItems}</ul>
+
+        <ul className={'group-list'}>{listItems}
+        </ul>
     )
   }
 
