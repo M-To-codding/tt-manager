@@ -425,3 +425,12 @@ main {
     bottom:0;
     margin:auto;
 }
+
+.unchecked-tasks-list {
+    width: 170px;
+    height:auto;
+    background-color: white;
+    box-shadow: 0 0 3px 0px #ccc;
+    padding: 10px 15px;
+    position: absolute;
+}
