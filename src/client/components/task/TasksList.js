@@ -262,15 +262,16 @@ export default class TasksList extends Component {
             }
 
             {this.renderTimer(task)}
-            {this.renderProgressBar(task)}
-
           </div>
+
           <button className="show-description"
                   onClick={(event) => createModal(event, task, (event)=>this.saveDescription(event, task))}>
             Show description
           </button>
 
         </div>
+
+        {this.renderProgressBar(task)}
 
         <div className="date-time">
           <p>
