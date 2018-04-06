@@ -11,8 +11,15 @@ export default class TimerHandler {
     let timeHolder = this.createOrFindTimeHolder(args);
 
     return {
-      start: () => {timeHolder.needCount = true},
-      stop: () => {timeHolder.needCount = false}
+      start: () => {
+        timeHolder.needCount = true;
+        window.onbeforeunload = function () {
+          return 'You have unsaved changes!';
+        }
+      },
+      stop: () => {
+        timeHolder.needCount = false
+      }
     }
   }
 
@@ -26,7 +33,7 @@ export default class TimerHandler {
 
   static doUpdate() {
     this.timeHolders.forEach((timeHolder) => {
-      if(timeHolder.needCount) {
+      if (timeHolder.needCount) {
         timeHolder.seconds++;
         timeHolder.callback({seconds: timeHolder.seconds})
       }
@@ -35,7 +42,7 @@ export default class TimerHandler {
 
   static createOrFindTimeHolder(args) {
     let existingTimeHolder = this.timeHolders.find((existing) => existing.id == args.id);
-    if(existingTimeHolder == null) {
+    if (existingTimeHolder == null) {
       let timeHolder = this.createTimeHolder(args);
       this.timeHolders.push(timeHolder);
       return timeHolder;
