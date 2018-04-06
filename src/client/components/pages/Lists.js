@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
+
 import TasksList from './../task/TasksList';
+import GroupForm from '../group/GroupForm';
+import GroupsList from '../group/GroupsList';
 
 export default class Lists extends Component {
 
@@ -8,11 +11,13 @@ export default class Lists extends Component {
     this.routeName = 'lists';
   }
 
-    render() {
-        return (
-            <article className="tasks-content">
-                <TasksList {...[this.routeName]} />
-            </article>
-        )
-    }
+  render() {
+    return (
+      <article className="tasks-content">
+        <GroupForm />
+        <GroupsList />
+        <TasksList {...[this.routeName]} />
+      </article>
+    )
+  }
 }
