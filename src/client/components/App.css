@@ -185,7 +185,7 @@ main {
     width: 100%;
     text-align: center;
     color: #fff;
-    font-size: 23px;
+    font-size: 20px;
 }
 
 /*------tasks list----------*/
@@ -367,4 +367,61 @@ main {
     line-height: 30px;
     width: 349px;
     text-shadow: 0 0 2px black;
+}
+
+
+/*---------------Groups------------*/
+
+.create-group-form {
+    border: 1px solid #f1f1f1;
+    width: 50%;
+    margin-left: auto;
+    height: 40px;
+    padding:10px 20px 20px;
+    transition: 0.5s ease-out;
+    overflow: hidden;
+    cursor: pointer;
+}
+.create-group-form:hover {
+    height:100px;
+    transition: 0.5s ease-out;
+}
+
+.create-group-form .form-title {
+    color: inherit;
+    margin-top: 0;
+}
+
+.create-group-form .form-control {
+    display: flex;
+    width: initial;
+}
+
+.form-block {
+    height: 100px;
+}
+
+.group-list {
+    display: flex;
+    justify-content: center;
+}
+
+.group-item {
+    display: inline-block;
+    min-width: 130px;
+    margin: 0 10px;
+    position: relative;
+    border: 1px solid #ccc;
+    padding: 10px 20px 10px 30px;
+    cursor: pointer;
+}
+
+.group-icon {
+    height: 25px;
+    width: 25px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom:0;
+    margin:auto;
 }
