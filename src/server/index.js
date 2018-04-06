@@ -4,7 +4,8 @@ let express = require('express'),
   index = require('./controllers/index.js'),
   main = require('./controllers/main.js'),
   work = require('./controllers/work.js'),
-  lists = require('./controllers/lists.js');
+  lists = require('./controllers/lists.js'),
+  group = require('./controllers/group.js');
 
 require('./db');
 
@@ -21,6 +22,7 @@ app.use('/api/v1', index);
 app.use('/api/v1', main);
 app.use('/api/v1', work);
 app.use('/api/v1', lists);
+app.use('/api/v1', group);
 
 app.set('view engine', 'jade');
 
