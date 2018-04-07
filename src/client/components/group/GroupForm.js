@@ -31,7 +31,7 @@ export default class GroupForm extends Component {
 
     let group = new Group({
       name: values.name,
-      tasks: tasks || 'Tasks not exists',
+      tasks: tasks || [],
       time: this.currentDate.format('h:mm:ss'),
       date: this.currentDate.format('DD.MM.YYYY')
     });

@@ -1,6 +1,6 @@
 let express = require('express'),
   router = express.Router(),
-  Task = require('../models/task');
+  Task = require('../models/task'),
   Group = require('../models/group');
 
 router.get('/lists', function (req, res) {

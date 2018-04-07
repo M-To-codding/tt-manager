@@ -46,6 +46,7 @@ router.put('/inWork/:id', function (req, res) {
         res.send(err.status);
       } else {
         console.log(req.body);
+        res.send('ok', 200);
       }
     })
   } else if (req.body.estimatedTime) {
