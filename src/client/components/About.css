@@ -1,0 +1,39 @@
+.about-project-page {
+    background-image: url(http://blog-imgs-93.fc2.com/a/s/i/asiareaction/160820-1-001.jpg);
+    background-size: 199% 320%;
+    background-position: 37% 30%;
+    background-attachment: fixed;
+    height: 450px;
+    color: #fff;
+    position: relative;
+    width: 100%;
+    padding: 30px;
+    z-index:0;
+}
+.about-project-page p, .about-project-page h1,
+.about-project-page span, .about-project-page div {
+    z-index: 20;
+    position: relative;
+    color: #fff;
+    font-weight: 200;
+}
+.about-project-page:after {
+    content: '';
+    background-color: rgba(0, 0, 0, 0.53);
+    position: absolute;
+    display: block;
+    width:100%;
+    height: 100%;
+    top:0;
+    bottom: 0;
+    left: -1px;
+    right: 0;
+    z-index:1;
+}
+
+.about-project-page .title{
+    text-align: center;
+    position: relative;
+    font-size: 60px;
+    margin-top: 20%;
+}

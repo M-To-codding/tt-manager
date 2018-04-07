@@ -5,6 +5,13 @@
     box-sizing: border-box;
 }
 
+body {
+    background-image: url("http://blog-imgs-93.fc2.com/a/s/i/asiareaction/160820-1-001.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
 a, b {
     color: inherit;
 }
@@ -49,8 +56,8 @@ span, div {
 
 header {
     width: 180px;
-    height: 270px;
     border-right: 1px solid #ccc;
+    background-color: rgba(242, 247, 251, 0.55);
 }
 
 .-black-bg {
@@ -84,13 +91,14 @@ header {
 
 main {
     width: 100%;
+    background-color: rgba(255, 255, 255, 0.75);
 }
 
 /*------tasks form----------*/
 
 .create-task-form {
     display: flex;
-    background-color: #a1add6;
+    background-color: #274c93;
     padding: 15px 20px;
     margin: auto;
     color: #fff;
@@ -158,7 +166,7 @@ main {
     background: -webkit-linear-gradient(-45deg, rgba(161, 173, 214, 0) 0%, rgba(172, 186, 230, 1) 50%, rgba(161, 173, 214, 0) 100%);
     background: -o-linear-gradient(-45deg, rgba(161, 173, 214, 0) 0%, rgba(172, 186, 230, 1) 50%, rgba(161, 173, 214, 0) 100%);
     background: -ms-linear-gradient(-45deg, rgba(161, 173, 214, 0) 0%, rgba(172, 186, 230, 1) 50%, rgba(161, 173, 214, 0) 100%);
-    background: linear-gradient(135deg, rgba(161, 173, 214, 0) 0%, rgba(172, 186, 230, 1) 50%, rgba(161, 173, 214, 0) 100%);
+    background: linear-gradient(135deg, rgba(161, 173, 214, 0) 0%, rgba(172, 186, 230, 0.31) 50%, rgba(161, 173, 214, 0) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#a1add6', endColorstr='#a1add6', GradientType=1);
     color: #fff;
     padding: 5px 10px;
@@ -190,7 +198,7 @@ main {
 
 /*------tasks list----------*/
 .task-item {
-    border: 1px solid #f1f1f1;
+    border: 1px solid #ccc;
     padding: 28px 20px;
     line-height: 22px;
     margin: auto;
@@ -199,6 +207,8 @@ main {
     flex-wrap: wrap;
     max-width: 540px;
     align-items: center;
+    background-color: rgba(255, 255, 255, 0.52);
+    box-shadow: 0 0 3px rgba(204, 204, 204, 0.5);
     position: relative;
 }
 
@@ -345,7 +355,7 @@ main {
     vertical-align: middle;
     height: 30px;
     width: inherit;
-    background: #f1f1f1;
+    background: #ccc;
 }
 
 .progress-bar .frame .progress {
@@ -369,21 +379,21 @@ main {
     text-shadow: 0 0 2px black;
 }
 
-
 /*---------------Groups------------*/
 
 .create-group-form {
-    border: 1px solid #f1f1f1;
+    border: 1px solid #ccc;
     width: 50%;
     margin-left: auto;
     height: 40px;
-    padding:10px 20px 20px;
+    padding: 10px 20px 20px;
     transition: 0.5s ease-out;
     overflow: hidden;
     cursor: pointer;
 }
+
 .create-group-form:hover {
-    height:100px;
+    height: 100px;
     transition: 0.5s ease-out;
 }
 
@@ -414,6 +424,8 @@ main {
     border: 1px solid #ccc;
     padding: 10px 20px 10px 30px;
     cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.52);
+    box-shadow: 0 0 3px rgba(204, 204, 204, 0.5);
 }
 
 .group-icon {
@@ -422,13 +434,13 @@ main {
     position: absolute;
     left: 0;
     top: 0;
-    bottom:0;
-    margin:auto;
+    bottom: 0;
+    margin: auto;
 }
 
 .unchecked-tasks-list {
     width: 170px;
-    height:auto;
+    height: auto;
     background-color: white;
     box-shadow: 0 0 3px 0px #ccc;
     padding: 10px 15px;

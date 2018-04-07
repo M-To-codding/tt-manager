@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import './App.css';
+import './About.css';
 import {
   BrowserRouter as Router,
   Route,
@@ -10,9 +11,11 @@ import Lists from './pages/Lists';
 import InWork from './pages/InWork';
 import Main from './pages/Main';
 import GroupDetails from './pages/GroupDetails';
+import About from './pages/About';
 
 
 class App extends Component {
+
   render() {
     return (
       <Router>
@@ -20,6 +23,10 @@ class App extends Component {
           <header>
             <nav>
               <ul>
+
+                <li>
+                  <Link to="/">About</Link>
+                </li>
 
                 <li>
                   <Link to="/main">Main</Link>
@@ -38,6 +45,12 @@ class App extends Component {
           </header>
 
           <main>
+
+            <Route
+              exact
+              path="/"
+              component={About}
+            />
 
             <Route
               path="/main"
